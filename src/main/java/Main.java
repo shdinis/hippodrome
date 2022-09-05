@@ -1,34 +1,1 @@
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-public class Main {
-
-    public static void main(String[] args) throws Exception {
-        List<Horse> horses = List.of(
-                new Horse("Р‘СѓС†РµС„Р°Р»", 2.4),
-                new Horse("РўСѓР· РџРёРє", 2.5),
-                new Horse("Р—РµС„РёСЂ", 2.6),
-                new Horse("РџРѕР¶Р°СЂ", 2.7),
-                new Horse("Р›РѕР±СЃС‚РµСЂ", 2.8),
-                new Horse("РџРµРіР°СЃ", 2.9),
-                new Horse("Р’РёС€РЅСЏ", 3)
-        );
-        Hippodrome hippodrome = new Hippodrome(horses);
-
-        for (int i = 0; i < 100; i++) {
-            hippodrome.move();
-            watch(hippodrome);
-            TimeUnit.MILLISECONDS.sleep(200);
-        }
-
-        String winnerName = hippodrome.getWinner().getName();
-        System.out.println("РџРѕР±РµРґРёР» " + winnerName + "!");
-    }
-
-    private static void watch(Hippodrome hippodrome) throws Exception {
-        hippodrome.getHorses().stream()
-                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())
-                .forEach(System.out::println);
-        System.out.println("\n".repeat(10));
-    }
-}
+import org.apache.logging.log4j.LogManager;import org.apache.logging.log4j.Logger;import java.util.List;import java.util.concurrent.TimeUnit;public class Main {    private static final Logger logger = LogManager.getLogger(Main.class);    public static void main(String[] args) throws Exception {        List<Horse> horses = List.of(                new Horse("Буцефал", 2.4),                new Horse("Туз Пик", 2.5),                new Horse("Зефир", 2.6),                new Horse("Пожар", 2.7),                new Horse("Лобстер", 2.8),                new Horse("Пегас", 2.9),                new Horse("Вишня", 3)        );        Hippodrome hippodrome = new Hippodrome(horses);        logger.info("Начало скачек. Колличество участников: {}", horses.size());        for (int i = 0; i < 1; i++) {            hippodrome.move();            watch(hippodrome);            TimeUnit.MILLISECONDS.sleep(200);        }        String winnerName = hippodrome.getWinner().getName();        System.out.println("Победил " + winnerName + "!");        logger.info("Окончание скачек. Победитель: {}", winnerName);    }    private static void watch(Hippodrome hippodrome) throws Exception {        hippodrome.getHorses().stream()                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())                .forEach(System.out::println);        System.out.println("\n".repeat(10));    }}
