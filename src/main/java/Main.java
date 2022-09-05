@@ -1,1 +1,40 @@
-import org.apache.logging.log4j.LogManager;import org.apache.logging.log4j.Logger;import java.util.List;import java.util.concurrent.TimeUnit;public class Main {    private static final Logger logger = LogManager.getLogger(Main.class);    public static void main(String[] args) throws Exception {        List<Horse> horses = List.of(                new Horse("Буцефал", 2.4),                new Horse("Туз Пик", 2.5),                new Horse("Зефир", 2.6),                new Horse("Пожар", 2.7),                new Horse("Лобстер", 2.8),                new Horse("Пегас", 2.9),                new Horse("Вишня", 3)        );        Hippodrome hippodrome = new Hippodrome(horses);        logger.info("Начало скачек. Колличество участников: {}", horses.size());        for (int i = 0; i < 1; i++) {            hippodrome.move();            watch(hippodrome);            TimeUnit.MILLISECONDS.sleep(200);        }        String winnerName = hippodrome.getWinner().getName();        System.out.println("Победил " + winnerName + "!");        logger.info("Окончание скачек. Победитель: {}", winnerName);    }    private static void watch(Hippodrome hippodrome) throws Exception {        hippodrome.getHorses().stream()                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())                .forEach(System.out::println);        System.out.println("\n".repeat(10));    }}
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
+
+    public static void main(String[] args) throws Exception {
+        List<Horse> horses = List.of(
+                new Horse("ГЃГіГ¶ГҐГґГ Г«", 2.4),
+                new Horse("Г’ГіГ§ ГЏГЁГЄ", 2.5),
+                new Horse("Г‡ГҐГґГЁГ°", 2.6),
+                new Horse("ГЏГ®Г¦Г Г°", 2.7),
+                new Horse("Г‹Г®ГЎГ±ГІГҐГ°", 2.8),
+                new Horse("ГЏГҐГЈГ Г±", 2.9),
+                new Horse("Г‚ГЁГёГ­Гї", 3)
+        );
+        Hippodrome hippodrome = new Hippodrome(horses);
+        logger.info("ГЌГ Г·Г Г«Г® Г±ГЄГ Г·ГҐГЄ. ГЉГ®Г«Г«ГЁГ·ГҐГ±ГІГўГ® ГіГ·Г Г±ГІГ­ГЁГЄГ®Гў: {}", horses.size());
+        for (int i = 0; i < 1; i++) {
+            hippodrome.move();
+            watch(hippodrome);
+            TimeUnit.MILLISECONDS.sleep(200);
+        }
+
+        String winnerName = hippodrome.getWinner().getName();
+        System.out.println("ГЏГ®ГЎГҐГ¤ГЁГ« " + winnerName + "!");
+        logger.info("ГЋГЄГ®Г­Г·Г Г­ГЁГҐ Г±ГЄГ Г·ГҐГЄ. ГЏГ®ГЎГҐГ¤ГЁГІГҐГ«Гј: {}", winnerName);
+    }
+
+    private static void watch(Hippodrome hippodrome) throws Exception {
+        hippodrome.getHorses().stream()
+                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())
+                .forEach(System.out::println);
+        System.out.println("\n".repeat(10));
+    }
+}
+
